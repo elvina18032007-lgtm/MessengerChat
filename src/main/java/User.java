@@ -50,7 +50,7 @@ public class User {
     public String colorName() {
         return colorCode + userName + "\u001B[0m";
     }
-    public static void toString(User[] masUsers) {
+    public static void toPrintUsers(User[] masUsers) {
         for (int i = 0; i < masUsers.length; i++) {
             System.out.println(masUsers[i].colorName());
         }
