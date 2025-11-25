@@ -1,5 +1,6 @@
 import java.util.Objects;
 import java.util.Scanner;
+
 /*
 Стейси
 Джейкоб
@@ -7,6 +8,7 @@ import java.util.Scanner;
 Аманда
 Нил
  */
+
 public class Main {
     public static User[] masUsers = new User[5];
     public static Group[] groups = new Group[2];
@@ -61,6 +63,8 @@ public class Main {
                 makeNewPost();
             } else if (action.equals("Написать сообщение")) {
                 writeAMessage();
+            } else if (action.equals("Прочитать сообщения")) {
+                readMessages();
             } else {
                 System.out.println("Некорректный ввод команды");
             }
@@ -87,34 +91,27 @@ public class Main {
         Channel.posts(new User("Мой канал"), admin, masUsers, post);
     }
 
-    // Написать сообщение
-    public static void writeAMessage() {
+    // прочитать сообщения
+    public static void readMessages() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Выбери, куда написать: \"личные сообщения\" (\"лс\") или \"группы\"");
-        String toWhere = scanner.nextLine();
-
-        if (toWhere.equals("личные сообщения")||toWhere.equals("лс")) {
-            System.out.println("Выбери кому написать:");
+        System.out.println("Выбери, где прочитать: \"личные сообщения\" (\"лс\") или \"группы\"");
+        String choice = scanner.nextLine();
+        if (choice.equals("личные сообщения") || choice.equals("лс")) {
+            System.out.println("Выбери чат:");
             User.toPrintUsers(users);
             String directChat = scanner.nextLine();
             for (DirectMessages dm : dms) {
                 if (dm.getReceiver().equals(directChat)) {
                     dm.printMessages();
-                    System.out.println("Введите сообщение...");
-                    dm.sendMessage(scanner.nextLine(), "сегодня");
-                    dm.printMessages();
                     break;
                 }
             }
-        } else if (toWhere.equals("группы")) {
+        } else if (choice.equals("группы")) {
             System.out.println("Выбери группу:");
             Group.printGroups(groups);
             String chat = scanner.nextLine();
             for (Group group : groups) {
                 if (group.getName().equals(chat)) {
-                    group.printMessages();
-                    System.out.println("Введите сообщение...");
-                    group.sendMessage(scanner.nextLine(), "сегодня", admin);
                     group.printMessages();
                     break;
                 }
@@ -122,15 +119,50 @@ public class Main {
         } else System.out.println("Некорректный ввод");
     }
 
-    // вывод меню
-    public static void menu() {
-        System.out.println("""
-                \nВам доступны следующие операции:\s
-                \u25CF Написать сообщение\s
-                \u25CF Прочитать сообщения
-                \u25CF Зайти на канал\s
-                \u25CF Сделать новый пост\s
-                \u25CF Exit
-                """);
-    }
+        // Написать сообщение
+        public static void writeAMessage() {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Выбери, куда написать: \"личные сообщения\" (\"лс\") или \"группы\"");
+            String toWhere = scanner.nextLine();
+
+            if (toWhere.equals("личные сообщения") || toWhere.equals("лс")) {
+                System.out.println("Выбери кому написать:");
+                User.toPrintUsers(users);
+                String directChat = scanner.nextLine();
+                for (DirectMessages dm : dms) {
+                    if (dm.getReceiver().equals(directChat)) {
+                        dm.printMessages();
+                        System.out.println("Введите сообщение...");
+                        dm.sendMessage(scanner.nextLine(), "сегодня");
+                        dm.printMessages();
+                        break;
+                    }
+                }
+            } else if (toWhere.equals("группы")) {
+                System.out.println("Выбери группу:");
+                Group.printGroups(groups);
+                String chat = scanner.nextLine();
+                for (Group group : groups) {
+                    if (group.getName().equals(chat)) {
+                        group.printMessages();
+                        System.out.println("Введите сообщение...");
+                        group.sendMessage(scanner.nextLine(), "сегодня", admin);
+                        group.printMessages();
+                        break;
+                    }
+                }
+            } else System.out.println("Некорректный ввод");
+        }
+
+        // вывод меню
+        public static void menu() {
+            System.out.println("""
+                    \nВам доступны следующие операции:
+                    \u25CF Написать сообщение
+                    \u25CF Прочитать сообщения
+                    \u25CF Зайти на канал
+                    \u25CF Сделать новый пост
+                    \u25CF Exit
+                    """);
+        }
 }
