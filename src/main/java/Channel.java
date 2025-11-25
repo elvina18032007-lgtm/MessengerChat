@@ -1,89 +1,38 @@
 public class Channel {
-    protected String choice;
+    private User owner;
+    private String[] posts;
+    private int count; // сколько постов реально добавлено
 
-    public Channel(String choice) {
-        this.choice = choice;
+    // Максимум постов — например, 20
+    private static final int maxPosts = 10;
+
+    public Channel(User owner) {
+        this.owner = owner;
+        this.posts = new String[maxPosts];
+        this.count = 0;
     }
 
-    public Channel() {}
-    public static void posts(User name, User admin, User[] masUsers, String post) {
-        User[] user = User.getUsers(masUsers, admin);
-        String colorTittle = "\u001B[38;2;184;134;11m";
-        String reset = "\u001B[0m";
-        if (name.userName.equals(user[0].userName)) {
-            System.out.print("Канал: " + colorTittle + "Tail Mail" + reset + " admin: " + name  + " followers: 35.000"
-                    + "\n --------------------22 ноября 2025--------------------\n" +
-                    "Всееееем привет!!! Немножко о себе: Я ПРОСТО ОБОЖАЮ ЖИВОТНЫХ\n" +
-                    "Нуууу настолько сильно, что пришлось создать целый канал!\n" +
-                    "Так чтооо.... Добро пожаловать!\n" +
-                    "Здесь вы найдете: \n" +
-                    "\u25CF Истории спасённых хвостиков — от приюта до уютного дома\n" +
-                    "\u25CF Советы по уходу за питомцами: от корма до дрессировки\n" +
-                    "\u25CF Обзоры приютов и как им помочь (даже без денег!)\n" +
-                    "\u25CF Волонтёрские лайфхаки и реальные кейсы\n" +
-                    "\u25CF Иногда — просто милые истории из жизни с моим щеночком, чтобы поднять настроение ");
+    public void addPost(String post) {
+        if (count < maxPosts) {
+            posts[count] = post;
+            count++;
+        } else {
+            System.out.println("Канал переполнен! Нельзя добавить больше " + maxPosts + " постов.");
         }
-        if (name.userName.equals(user[1].userName)) {
-            System.out.print("Канал: " + colorTittle + "Физика для гуманитариев" + reset + " admin: " + name + " followers: 1000" +
-                    "\n --------------------19 ноября 2025--------------------\n" +
-                    " Почему небо синее?\n" +
-                    "Потому что синий свет «рассеивается» в воздухе сильнее других.\n" +
-                    "Остальные цвета просто торопятся к земле — а синий остаётся болтаться над нами." +
-                    "\n --------------------20 ноября 2025--------------------\n" +
-                    "Лежать на диване — нормально.\n" +
-                    "Это не лень — это инерция.\n" +
-                    "Тело в покое остаётся в покое, пока не поймёт, что кофе остыл." +
-                    "\n --------------------21 ноября 2025--------------------\n" +
-                    "Почему чайник свистит?\n" +
-                    "Пар давит на узкое отверстие — и заставляет воздух вибрировать.\n" +
-                    "По сути, чайник — это духовой инструмент с единственной нотой: «Выключи меня!».");
-        }
-        if (name.userName.equals(user[2].userName)) {
-            System.out.print("Канал: " + colorTittle + "Звёзды не врут (ну почти) " + reset + " admin: " + name  + " followers: 5000" +
-                    "\n --------------------20 ноября 2025--------------------\n" +
-                    "Сегодня звёзды в замешательстве.\n" +
-                    "Вы — тоже.\n" +
-                    "Это нормально. Просто пейте чай и не принимайте важных решений до обеда. " +
-                    "\n --------------------21 ноября 2025--------------------\n" +
-                    "Луна в Раке, а вы — в пижаме.\n" +
-                    "Звёзды одобряют.\n" +
-                    "Главное — не путать «планы на вечер» с «планами выжить до утра». ");
-        }
-        if (name.userName.equals(user[3].userName)) {
-            System.out.print("Канал: " + colorTittle + "Between Pages" + reset + " admin: "  + name +  " followers: 35" +
-                    "\n --------------------20 ноября 2025--------------------\n" +
-                    "ОООО ребят моя домашняя библиотека пополнилась на пру тройку книг\n" +
-                    "Ждите обзорчики!!!!!\n" +
-                    "\n --------------------21 ноября 2025--------------------\n" +
-                    "о гспд... каждый должен прочитать Тревожные люди\n" +
-                    "поверьте это оооочень хорошо\n" +
-                    "завтра будет отзыв!");
-        }
-        if (name.userName.equals(new User("Мой канал").userName)) {
-            String[] masPost = new String[10];
-            masPost[0] = "Канал: " + colorTittle + "стыд и позор" + reset + " admin: "  + "Вы" + " followers: 4" +
-                    "\n --------------------19 ноября 2025--------------------\n" +
-                    "Блин такая классная кафешка открылась около моего дома. Оч вкусно!\n";
-            masPost[1] = "\n --------------------20 ноября 2025--------------------\n" +
-                    "Ничего не делать целый день так классно! А у вас как дела?)\n";
-            masPost[2] = "\n --------------------21 ноября 2025--------------------\n" +
-                    "Зачем люди придумали высшую математику... \n";
-            if (!post.equals("")) {
-                for (int i = 0; i < 10; i++) {
-                    if (masPost[i] == null) {
-                        masPost[i] = "\n --------------------сегодня--------------------\n" +
-                                post + "\n";
-                        break;
-                    }
-                }
+    }
+
+    public void printChannel() {
+        if (count == 0) {
+            System.out.println("Пока нет постов.");
+        } else {
+            for (int i = 0; i < count; i++) {
+                System.out.println(posts[i]);
             }
-            toString(masPost);
         }
+        System.out.println("======================================\n");
     }
 
-    public static void toString(String[] masPost) {
-        for (String post : masPost) {
-            if (post != null) System.out.println(post);
-        }
+    public User getOwner() {
+        return owner;
     }
 }
