@@ -11,6 +11,7 @@ public class User {
 
     public User() {
     }
+
     public String getUserName() {
         return this.userName;
     }
@@ -33,15 +34,15 @@ public class User {
         return colors[color];
     }
     public static User[] getUsers(User[] masUsers, User admin) {
-        User[] users = new User[4];
+        User[] users = new User[masUsers.length-1];
         int index = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < masUsers.length; i++) {
             if (!masUsers[i].userName.equals(admin.userName)) users[index++] = masUsers[i];
         }
         return users;
     }
     public String codeAdmin(User[] masUsers, User admin) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < masUsers.length; i++) {
             if (masUsers[i].userName.equals(admin.userName)) return masUsers[i].colorCode;
         }
         return null;
