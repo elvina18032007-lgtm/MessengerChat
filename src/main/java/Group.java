@@ -9,7 +9,12 @@ public class Group {
         this.name = name;
     }
 
+    public Group() {
+        this.name = "Новая группа";
+    }
+
     public void printMessages() {
+        System.out.println("----- " + name + " -----");
         for (Message msg : messages) {
             if (msg == null) {
                 break;
@@ -20,7 +25,6 @@ public class Group {
 
     public void sendMessage(String text, String date, User sender) {
         Message message = new Message(text, date, sender);
-        System.out.println("----- " + name + " -----");
         for (int i = 0; i < messages.length; i++) {
             if (messages[i] == null) {
                 messages[i] = message;
@@ -28,4 +32,14 @@ public class Group {
             }
         }
     }
+    public String getName(){
+        return name;
+    }
+
+    public static void printGroups(Group[] groups) {
+        for (int i = 0; i < groups.length; i++) {
+            System.out.println(groups[i].getName());
+        }
+    }
 }
+
