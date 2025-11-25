@@ -25,7 +25,6 @@ public class Message {
     }
 
     public String toString(){
-
         return sender + " |" + date + "|" + ":\n" + text;
     }
 

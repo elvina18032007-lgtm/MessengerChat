@@ -1,16 +1,19 @@
 public class Group {
     protected String name;
     protected Message[] messages = new Message[100];
+    public User[] members;
 
-    public Group(String name, Message[] messages) {
+    public Group(String name, Message[] messages, User[] members) {
         for (int i = 0; i < messages.length; i++) {
             this.messages[i] = messages[i];
         }
         this.name = name;
+        this.members = members;
     }
 
     public Group() {
         this.name = "Новая группа";
+        this.members = new User[]{Main.admin};
     }
 
     public void printMessages() {
