@@ -14,12 +14,13 @@ public class Group {
             if (msg == null) {
                 break;
             }
-            System.out.println(msg);
+            System.out.println(msg.getSender().colorName() + " |" + msg.getDate() + "|:\n" + msg.getText());
         }
     }
 
     public void sendMessage(String text, String date, User sender) {
         Message message = new Message(text, date, sender);
+        System.out.println("----- " + name + " -----");
         for (int i = 0; i < messages.length; i++) {
             if (messages[i] == null) {
                 messages[i] = message;
