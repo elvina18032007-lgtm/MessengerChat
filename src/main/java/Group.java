@@ -22,7 +22,10 @@ public class Group {
             if (msg == null) {
                 break;
             }
-            System.out.println(msg.getSender().colorName() + " |" + msg.getDate() + "|:\n" + msg.getText());
+            if (msg.getSender().getUserName().equals(Main.admin.getUserName())) {
+                System.out.println(Main.admin.codeAdmin() + "Вы" + "\u001B[0m" +  " |" + msg.getDate() + "|:\n" + msg.getText());
+            }
+            else System.out.println(msg.getSender().colorName() + " |" + msg.getDate() + "|:\n" + msg.getText());
         }
     }
 

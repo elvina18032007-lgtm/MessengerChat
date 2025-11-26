@@ -41,9 +41,9 @@ public class User {
         }
         return users;
     }
-    public String codeAdmin(User[] masUsers, User admin) {
-        for (int i = 0; i < masUsers.length; i++) {
-            if (masUsers[i].userName.equals(admin.userName)) return masUsers[i].colorCode;
+    public String codeAdmin() {
+        for (int i = 0; i < Main.masUsers.length; i++) {
+            if (Main.masUsers[i].userName.equals(Main.admin.userName)) return Main.masUsers[i].colorCode;
         }
         return null;
     }

@@ -53,7 +53,7 @@ public class Main {
 
         // запуск программы
         menu();
-        //User[] users = User.getUsers(masUsers, admin);
+
         // Создаём каналы для всех пользователей
         allChannels = new Channel[masUsers.length];
         for (int i = 0; i < masUsers.length; i++) {
@@ -70,7 +70,7 @@ public class Main {
         // Канал admin
         if (adminIndex != -1) {
             allChannels[adminIndex].addPost(
-                    "Канал: \u001B[38;2;184;134;11mстыд и позор\u001B[0m admin: " + admin.codeAdmin(masUsers,admin) + "Вы" + "\u001B[0m" + " followers: 4\n" +
+                    "Канал: \u001B[38;2;184;134;11mстыд и позор\u001B[0m admin: " + admin.codeAdmin() + "Вы" + "\u001B[0m" + " followers: 4\n" +
                             "--------------------19 ноября 2025--------------------\n" +
                             "Блин такая классная кафешка открылась около моего дома. Оч вкусно!"
             );
@@ -162,7 +162,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Выбери чей канал хочешь посетить: ");
         User.toPrintUsers(users);
-        System.out.println(admin.codeAdmin(masUsers, admin) + "Мой канал" + "\u001B[0m");
+        System.out.println(admin.codeAdmin() + "Мой канал" + "\u001B[0m");
         String name = scanner.nextLine();
         User user = new User(name);
         if (name.equals("Мой канал")) user = admin;
